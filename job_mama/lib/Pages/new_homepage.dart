@@ -125,70 +125,65 @@ class _HomePageState extends State<HomePage> {
                       size: Size(6, 6),
                     ),
                   ),
-                  Column(
-                    children: [
-                      space(20),
-                      Container(
-                        height: MediaQuery.of(context).size.height * .85,
-                        child: StreamBuilder<QuerySnapshot>(
-                          stream: db
-                              .collection('Jobs')
-                              .where("job_cat", isEqualTo: "Customer Support")
-                              .snapshots(),
-                          builder: ((context, snapshot) {
-                            if (!snapshot.hasData) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else {
-                              return ListView(
-                                scrollDirection: Axis.vertical,
-                                children: snapshot.data!.docs.map((doc) {
-                                  return Card(
-                                    child: ListTile(
-                                      style: ListTileStyle.list,
-                                      tileColor: Colors.amber.withOpacity(.2),
-                                      subtitle: Text(
-                                          "Deadline : ${doc["last_date"]}"),
-                                      title: Text(
-                                        "Post : " +
-                                            "${doc['post_name']}" +
-                                            "\n"
-                                                "Company : " +
-                                            doc['com_name'],
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        job_cat = doc['job_cat'].toString();
-                                        Com_name = doc['com_name'].toString();
-                                        post = doc['post_name'].toString();
-                                        requirement =
-                                            doc['requirement'].toString();
-                                        Location = doc['location'].toString();
-                                        job_type = doc['Job_type'].toString();
-                                        Last_date = doc['last_date'].toString();
-                                        nextScreen(
-                                            context,
-                                            job_show(
-                                                job_cat,
-                                                Com_name,
-                                                post,
-                                                requirement,
-                                                Location,
-                                                Last_date,
-                                                job_type));
-                                      },
+                  SizedBox(height: 20),
+                  Container(
+                    height: MediaQuery.of(context).size.height * .85,
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: db
+                          .collection('Jobs')
+                          .where("job_cat", isEqualTo: "Customer Support")
+                          .snapshots(),
+                      builder: ((context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
+                          return ListView(
+                            scrollDirection: Axis.vertical,
+                            children: snapshot.data!.docs.map((doc) {
+                              return Card(
+                                child: ListTile(
+                                  style: ListTileStyle.list,
+                                  tileColor: Colors.amber.withOpacity(.2),
+                                  subtitle:
+                                      Text("Deadline : ${doc["last_date"]}"),
+                                  title: Text(
+                                    "Post : " +
+                                        "${doc['post_name']}" +
+                                        "\n"
+                                            "Company : " +
+                                        doc['com_name'],
+                                    style: GoogleFonts.arvo(
+                                      fontSize: 20,
                                     ),
-                                  );
-                                }).toList(),
+                                  ),
+                                  onTap: () {
+                                    job_cat = doc['job_cat'].toString();
+                                    Com_name = doc['com_name'].toString();
+                                    post = doc['post_name'].toString();
+                                    requirement = doc['requirement'].toString();
+                                    Location = doc['location'].toString();
+                                    job_type = doc['Job_type'].toString();
+                                    Last_date = doc['last_date'].toString();
+                                    nextScreen(
+                                        context,
+                                        job_show(
+                                            job_cat,
+                                            Com_name,
+                                            post,
+                                            requirement,
+                                            Location,
+                                            Last_date,
+                                            job_type));
+                                  },
+                                ),
                               );
-                            }
-                          }),
-                        ),
-                      ),
-                    ],
+                            }).toList(),
+                          );
+                        }
+                      }),
+                    ),
                   ),
                 ],
               ),

@@ -2,26 +2,24 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:job_mama/Pages/job_show.dart';
 import 'package:job_mama/Pages/login.dart';
 import 'package:job_mama/Pages/new_job_form.dart';
 import 'package:job_mama/Widgets/widgets.dart';
-import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class cat_job_show extends StatefulWidget {
+  const cat_job_show({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<cat_job_show> createState() => _cat_job_showState();
 }
 
 int count = 0;
 
-class _HomePageState extends State<HomePage> {
+class _cat_job_showState extends State<cat_job_show> {
   String job_cat = "";
   String Com_name = "";
   String post = "";
@@ -125,70 +123,65 @@ class _HomePageState extends State<HomePage> {
                       size: Size(6, 6),
                     ),
                   ),
-                  Column(
-                    children: [
-                      space(20),
-                      Container(
-                        height: MediaQuery.of(context).size.height * .85,
-                        child: StreamBuilder<QuerySnapshot>(
-                          stream: db
-                              .collection('Jobs')
-                              .where("job_cat", isEqualTo: "Customer Support")
-                              .snapshots(),
-                          builder: ((context, snapshot) {
-                            if (!snapshot.hasData) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else {
-                              return ListView(
-                                scrollDirection: Axis.vertical,
-                                children: snapshot.data!.docs.map((doc) {
-                                  return Card(
-                                    child: ListTile(
-                                      style: ListTileStyle.list,
-                                      tileColor: Colors.amber.withOpacity(.2),
-                                      subtitle: Text(
-                                          "Deadline : ${doc["last_date"]}"),
-                                      title: Text(
-                                        "Post : " +
-                                            "${doc['post_name']}" +
-                                            "\n"
-                                                "Company : " +
-                                            doc['com_name'],
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        job_cat = doc['job_cat'].toString();
-                                        Com_name = doc['com_name'].toString();
-                                        post = doc['post_name'].toString();
-                                        requirement =
-                                            doc['requirement'].toString();
-                                        Location = doc['location'].toString();
-                                        job_type = doc['Job_type'].toString();
-                                        Last_date = doc['last_date'].toString();
-                                        nextScreen(
-                                            context,
-                                            job_show(
-                                                job_cat,
-                                                Com_name,
-                                                post,
-                                                requirement,
-                                                Location,
-                                                Last_date,
-                                                job_type));
-                                      },
+                  SizedBox(height: 20),
+                  Container(
+                    height: MediaQuery.of(context).size.height * .85,
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: db
+                          .collection('Jobs')
+                          .where("job_cat", isEqualTo: "Customer Support")
+                          .snapshots(),
+                      builder: ((context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
+                          return ListView(
+                            scrollDirection: Axis.vertical,
+                            children: snapshot.data!.docs.map((doc) {
+                              return Card(
+                                child: ListTile(
+                                  style: ListTileStyle.list,
+                                  tileColor: Colors.amber.withOpacity(.2),
+                                  subtitle:
+                                      Text("Deadline : ${doc["last_date"]}"),
+                                  title: Text(
+                                    "Post : " +
+                                        "${doc['post_name']}" +
+                                        "\n"
+                                            "Company : " +
+                                        doc['com_name'],
+                                    style: GoogleFonts.arvo(
+                                      fontSize: 20,
                                     ),
-                                  );
-                                }).toList(),
+                                  ),
+                                  onTap: () {
+                                    job_cat = doc['job_cat'].toString();
+                                    Com_name = doc['com_name'].toString();
+                                    post = doc['post_name'].toString();
+                                    requirement = doc['requirement'].toString();
+                                    Location = doc['location'].toString();
+                                    job_type = doc['Job_type'].toString();
+                                    Last_date = doc['last_date'].toString();
+                                    nextScreen(
+                                        context,
+                                        job_show(
+                                            job_cat,
+                                            Com_name,
+                                            post,
+                                            requirement,
+                                            Location,
+                                            Last_date,
+                                            job_type));
+                                  },
+                                ),
                               );
-                            }
-                          }),
-                        ),
-                      ),
-                    ],
+                            }).toList(),
+                          );
+                        }
+                      }),
+                    ),
                   ),
                 ],
               ),
