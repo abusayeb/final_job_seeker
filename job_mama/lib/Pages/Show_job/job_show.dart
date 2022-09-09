@@ -1,8 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:job_mama/Pages/cat_wise_job_show.dart';
-import 'package:job_mama/Pages/cv.dart';
+import 'package:job_mama/Pages/CV/cv.dart';
 import 'package:job_mama/Widgets/widgets.dart';
 
 class job_show extends StatelessWidget {

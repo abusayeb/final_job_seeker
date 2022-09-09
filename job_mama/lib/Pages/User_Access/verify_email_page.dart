@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:job_mama/Pages/cat_wise_job_show.dart';
-import 'package:job_mama/Pages/login.dart';
+import 'package:job_mama/Pages/User_Access/login.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({Key? key}) : super(key: key);

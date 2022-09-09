@@ -3,8 +3,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:job_mama/Pages/login.dart';
-import 'package:job_mama/Pages/verify_email_page.dart';
+import 'package:job_mama/Pages/User_Access/login.dart';
+import 'package:job_mama/Pages/User_Access/verify_email_page.dart';
 import 'package:job_mama/Widgets/widgets.dart';
 import 'package:lottie/lottie.dart';
 

@@ -4,11 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:job_mama/Pages/homepage.dart';
-import 'package:job_mama/Pages/login.dart';
 import 'package:job_mama/Widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
+
+import '../Homepage/Homepage.dart';
+import '../User_Access/login.dart';
 
 class new_job extends StatefulWidget {
   const new_job({Key? key}) : super(key: key);

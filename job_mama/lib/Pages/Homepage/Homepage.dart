@@ -5,12 +5,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:job_mama/Pages/job_show.dart';
-import 'package:job_mama/Pages/login.dart';
-import 'package:job_mama/Pages/new_job_form.dart';
+import 'package:job_mama/Pages/Show_job/cat_wise_job_show.dart';
 import 'package:job_mama/Widgets/widgets.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../Show_job/job_show.dart';
+import '../User_Access/login.dart';
+import '../job_create/new_job_form.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -71,18 +73,17 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       appBar: AppBar(
-        title: Text("Job Bazar"),
-        centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 221, 170, 120),
-        //0.5 is transparency
-      ),
+          title: Text("Job Bazar"),
+          centerTitle: true,
+          backgroundColor: Color.fromARGB(255, 249, 147, 57)
+          //0.5 is transparency
+          ),
       body: SafeArea(
         child: Stack(
           children: [
             Center(
               child: Container(
-                child: Image.asset('asset/us.jpg'),
-                decoration: BoxDecoration(),
+                color: Color.fromARGB(255, 194, 213, 248),
               ),
             ),
             Padding(
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   AspectRatio(
-                    aspectRatio: 3.5,
+                    aspectRatio: 2.5,
                     child: CarouselSlider(
                         items: _carouselImages
                             .map((item) => Container(
@@ -125,65 +126,57 @@ class _HomePageState extends State<HomePage> {
                       size: Size(6, 6),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Container(
-                    height: MediaQuery.of(context).size.height * .85,
-                    child: StreamBuilder<QuerySnapshot>(
-                      stream: db
-                          .collection('Jobs')
-                          .where("job_cat", isEqualTo: "Customer Support")
-                          .snapshots(),
-                      builder: ((context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else {
-                          return ListView(
-                            scrollDirection: Axis.vertical,
-                            children: snapshot.data!.docs.map((doc) {
-                              return Card(
-                                child: ListTile(
-                                  style: ListTileStyle.list,
-                                  tileColor: Colors.amber.withOpacity(.2),
-                                  subtitle:
-                                      Text("Deadline : ${doc["last_date"]}"),
-                                  title: Text(
-                                    "Post : " +
-                                        "${doc['post_name']}" +
-                                        "\n"
-                                            "Company : " +
-                                        doc['com_name'],
-                                    style: GoogleFonts.arvo(
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    job_cat = doc['job_cat'].toString();
-                                    Com_name = doc['com_name'].toString();
-                                    post = doc['post_name'].toString();
-                                    requirement = doc['requirement'].toString();
-                                    Location = doc['location'].toString();
-                                    job_type = doc['Job_type'].toString();
-                                    Last_date = doc['last_date'].toString();
-                                    nextScreen(
-                                        context,
-                                        job_show(
-                                            job_cat,
-                                            Com_name,
-                                            post,
-                                            requirement,
-                                            Location,
-                                            Last_date,
-                                            job_type));
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          color: Colors.amberAccent,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Icon(Icons.menu_book),
+                                SizedBox(width: 10),
+                                Text(
+                                  "Select job category",
+                                  style: GoogleFonts.arvo(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      space(10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 400,
+                              color: Colors.orangeAccent,
+                              child: FlatButton(
+                                  onPressed: () {
+                                    nextScreen(context, cat_job_show("Sales"));
                                   },
-                                ),
-                              );
-                            }).toList(),
-                          );
-                        }
-                      }),
-                    ),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.app_settings_alt),
+                                      Text(
+                                        "App Development",
+                                        style: GoogleFonts.arvo(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

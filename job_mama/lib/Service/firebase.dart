@@ -2,12 +2,11 @@ import 'dart:js';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:job_mama/Pages/cat_wise_job_show.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:job_mama/Pages/login.dart';
 import 'package:job_mama/Widgets/widgets.dart';
 
-import '../Pages/Homepage.dart';
+import '../Pages/Homepage/Homepage.dart';
+import '../Pages/User_Access/login.dart';
 
 class firebase {
   final FirebaseAuth _auth = FirebaseAuth.instance;

@@ -4,14 +4,13 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:job_mama/Pages/forgot_pw_page.dart';
-import 'package:job_mama/Pages/cat_wise_job_show.dart';
-import 'package:job_mama/Pages/signup.dart';
+import 'package:job_mama/Pages/User_Access/forgot_pw_page.dart';
+import 'package:job_mama/Pages/User_Access/signup.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Widgets/widgets.dart';
-import 'Homepage.dart';
+import '../../Widgets/widgets.dart';
+import '../Homepage/Homepage.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({Key? key}) : super(key: key);

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:job_mama/Pages/cat_wise_job_show.dart';
-import 'package:job_mama/Pages/cv.dart';
-import 'package:job_mama/Pages/login.dart';
-import 'package:job_mama/Pages/verify_email_page.dart';
+import 'package:job_mama/Pages/CV/cv.dart';
 import 'package:job_mama/Widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Pages/Homepage.dart';
+import 'Pages/Homepage/Homepage.dart';
+import 'Pages/User_Access/login.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,8 +48,8 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: isLoggedIn ? HomePage() : LogIn(),
-      home: cv_maker(),
+      home: isLoggedIn ? HomePage() : LogIn(),
+      // home: cv_maker(),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:job_mama/Widgets/widgets.dart';
 
-import 'Homepage.dart';
+import '../Homepage/Homepage.dart';
 
 class cv_maker extends StatefulWidget {
   const cv_maker({Key? key}) : super(key: key);
