@@ -1,4 +1,3 @@
-import 'package:basic_utils/basic_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,8 +36,27 @@ class _new_jobState extends State<new_job> {
   String Last_date = "";
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  var cat;
-  var type;
+  @override
+  void initState() {
+    super.initState();
+    this.jobs.add({"id": 1, "label": "Full-Time"});
+    this.jobs.add({"id": 2, "label": "Part-Time"});
+    this.jobs.add({"id": 3, "label": "Contractor"});
+    this.jobs.add({"id": 4, "label": "Temporary"});
+    this.jobs.add({"id": 5, "label": "Internship"});
+    this.jobs.add({"id": 6, "label": "Per diem"});
+    this.jobs.add({"id": 7, "label": "Volunteer"});
+
+    this.tags.add({"ID": 1, "value": "Development"});
+    this.tags.add({"ID": 2, "value": "Education"});
+    this.tags.add({"ID": 3, "value": "Sales"});
+    this.tags.add({"ID": 4, "value": "Health Care"});
+    this.tags.add({"ID": 5, "value": "Receptionist"});
+    this.tags.add({"ID": 6, "value": "Pharmaceutical"});
+    this.tags.add({"ID": 7, "value": "Custom"});
+    this.tags.add({"ID": 8, "value": "Finance"});
+    this.tags.add({"ID": 9, "value": "Others"});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,67 +88,37 @@ class _new_jobState extends State<new_job> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      space(30),
-
-                      text("Job Category"),
-                      space(5),
-
                       //Category Box
 
-                      Container(
-                        height: 60,
-                        width: 400,
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 241, 226, 226),
-                            border:
-                                Border.all(color: Colors.blueAccent, width: 2),
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: const EdgeInsets.all(0.0),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: DropdownButton<String>(
-                            value: cat,
-                            //elevation: 5,
-                            style: TextStyle(color: Colors.black),
+                      FormHelper.dropDownWidgetWithLabel(
+                        context,
+                        "Job Category",
+                        "Select here",
+                        this.tagsId,
+                        this.tags,
+                        (onChangedVal) {
+                          job_cat = onChangedVal;
+                          print("Selected tag: $onChangedVal");
+                        },
+                        (onValidateVal) {
+                          if (onValidateVal == null) {
+                            return 'Please Select one option';
+                          }
 
-                            items: <String>[
-                              'Development',
-                              'Education',
-                              'Sales',
-                              'Health Care',
-                              'Receptionist',
-                              'Pharmaceutical',
-                              'Custom',
-                              'Finance',
-                              'Others'
-                            ].map((j_cat) {
-                              return DropdownMenuItem(
-                                child: Text(j_cat),
-                                value: j_cat,
-                              );
-                            }).toList(),
-                            hint: Text(
-                              "Please choose a job Category                       ",
-                              style: GoogleFonts.lato(
-                                fontStyle: FontStyle.italic,
-                                fontSize: 16,
-                              ),
-                            ),
-                            onChanged: (value) {
-                              setState(() {
-                                cat = value;
-                                print(cat);
-                                print(cat.runtimeType);
-                              });
-                            },
-                          ),
-                        ),
+                          return null;
+                        },
+                        borderColor: Colors.blueAccent.withOpacity(.5),
+                        enabledBorderWidth: 3,
+                        borderRadius: 10,
+                        optionValue: "ID",
+                        optionLabel: "value",
                       ),
+
                       space(10),
 
                       //Company name textfield
 
-                      text("Company Name"),
+                      text("Company Name`"),
                       space(2),
                       TextFormField(
                         decoration: textInputDecoration.copyWith(
@@ -194,50 +182,31 @@ class _new_jobState extends State<new_job> {
 
                       //Job type choose
 
-                      Container(
-                        height: 60,
-                        width: 400,
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 241, 226, 226),
-                            border:
-                                Border.all(color: Colors.blueAccent, width: 2),
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: const EdgeInsets.all(0.0),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: DropdownButton<String>(
-                            value: type,
-                            //elevation: 5,
-                            style: TextStyle(color: Colors.black),
+                      FormHelper.dropDownWidgetWithLabel(
+                        context,
+                        "Job Types",
+                        "Select Job-Time",
+                        this.jobId,
+                        this.jobs,
+                        (onChangedVal) {
+                          job_type = onChangedVal;
+                          print("Selected job: $onChangedVal");
+                        },
+                        (onValidateVal) {
+                          if (onValidateVal == null) {
+                            return 'Please Select  Job hour';
+                          }
 
-                            items: <String>[
-                              'Full-Time',
-                              'Part-TIme',
-                              'Conditional'
-                            ].map((j_type) {
-                              return DropdownMenuItem(
-                                child: Text(j_type),
-                                value: j_type,
-                              );
-                            }).toList(),
-                            hint: Text(
-                              "Please choose a job type                       ",
-                              style: GoogleFonts.lato(
-                                fontStyle: FontStyle.italic,
-                                fontSize: 16,
-                              ),
-                            ),
-                            onChanged: (value) {
-                              setState(() {
-                                type = value;
-                                print(type.runtimeType);
-                                print(type);
-                              });
-                            },
-                          ),
-                        ),
+                          return null;
+                        },
+                        borderColor: Colors.blueAccent.withOpacity(.5),
+                        hintColor: Colors.red,
+                        enabledBorderWidth: 3,
+                        borderRadius: 10,
+                        optionValue: "id",
+                        optionLabel: "label",
                       ),
-                      space(10),
+
                       //Job Location
 
                       text("Location"),
@@ -316,14 +285,16 @@ class _new_jobState extends State<new_job> {
       final firestore = FirebaseFirestore.instance;
       firestore.collection('test').add({
         "com_name": Com_name,
-        "job_cat": cat,
-        "Job_type": type,
+        "job_cat": tags[int.parse(job_cat)]['value'],
+        "Job_type": jobs[int.parse(job_type)]['label'],
         "last_date": Last_date,
         "location": Location,
         "post_name": post,
         "requirement": requirement,
         "time": FieldValue.serverTimestamp(),
       });
+      print(jobs[int.parse(job_cat)]['label']);
+      print(tags[int.parse(job_type)]['value']);
 
       nextScreen(context, HomePage());
     }

@@ -63,9 +63,9 @@ SizedBox space(double val) {
 Text text(st) {
   return Text(
     st,
-    style: GoogleFonts.lato(
+    style: GoogleFonts.arvo(
       fontSize: 20,
-      fontWeight: FontWeight.bold,
+      // fontWeight: FontWeight.bold,
     ),
   );
 }

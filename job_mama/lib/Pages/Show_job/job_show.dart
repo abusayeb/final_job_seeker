@@ -108,7 +108,7 @@ class job_show extends StatelessWidget {
 
               //Last date
               Text(
-                "Last Date",
+                "Deadline",
                 style: GoogleFonts.bebasNeue(
                   fontSize: 25,
                   color: Colors.black54,
@@ -122,7 +122,7 @@ class job_show extends StatelessWidget {
               space(20),
               ElevatedButton(
                   onPressed: () {
-                    nextScreen(context, cv_maker());
+                    nextScreen(context, SettingsUI());
                   },
                   child: Text("Apply Now"))
             ],

@@ -15,6 +15,7 @@ class cat_job_show extends StatefulWidget {
   String cat = "";
   cat_job_show(String st) {
     cat = st;
+    print(cat);
   }
 
   @override
@@ -50,18 +51,23 @@ class _cat_job_showState extends State<cat_job_show> {
         ),
       ),
       appBar: AppBar(
-        title: Text("Job Bazar"),
+        title: Text(
+          "Job Bazar",
+          style: GoogleFonts.aldrich(fontSize: 25, fontWeight: FontWeight.w900),
+        ),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 221, 170, 120),
+        backgroundColor: Colors.purple,
+        // backgroundColor: Color.fromARGB(255, 221, 170, 120),
         //0.5 is transparency
       ),
       body: SafeArea(
         child: Stack(
           children: [
             Center(
-              child: Container(
-                child: Image.asset('asset/us.jpg'),
-                decoration: BoxDecoration(),
+              child: Center(
+                child: Container(
+                  color: Color.fromARGB(255, 194, 213, 248),
+                ),
               ),
             ),
             Padding(
@@ -72,7 +78,7 @@ class _cat_job_showState extends State<cat_job_show> {
                     height: MediaQuery.of(context).size.height * .85,
                     child: StreamBuilder<QuerySnapshot>(
                       stream: db
-                          .collection('Jobs')
+                          .collection('test')
                           .where("job_cat", isEqualTo: "$cat")
                           .snapshots(),
                       builder: ((context, snapshot) {
@@ -85,9 +91,16 @@ class _cat_job_showState extends State<cat_job_show> {
                             scrollDirection: Axis.vertical,
                             children: snapshot.data!.docs.map((doc) {
                               return Card(
+                                color: Color.fromARGB(255, 87, 85, 85),
                                 child: ListTile(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
                                   style: ListTileStyle.list,
-                                  tileColor: Colors.amber.withOpacity(.2),
+                                  tileColor:
+                                      //  Colors.grey[300],
+                                      // Color.fromARGB(255, 241, 233, 181),
+                                      const Color.fromARGB(255, 191, 186, 186),
                                   subtitle:
                                       Text("Deadline : ${doc["last_date"]}"),
                                   title: Text(
@@ -132,14 +145,6 @@ class _cat_job_showState extends State<cat_job_show> {
             )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          nextScreen(context, new_job());
-        },
-        tooltip: "Post a job here",
-        child: Icon(Icons.add),
-        backgroundColor: Colors.blue,
       ),
     );
   }
