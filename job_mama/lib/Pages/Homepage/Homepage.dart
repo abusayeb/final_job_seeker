@@ -84,342 +84,347 @@ class _HomePageState extends State<HomePage> {
                 color: Color.fromARGB(255, 194, 213, 248),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  AspectRatio(
-                    aspectRatio: 2.5,
-                    child: CarouselSlider(
-                        items: _carouselImages
-                            .map((item) => Container(
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(item),
-                                          fit: BoxFit.fitWidth)),
-                                ))
-                            .toList(),
-                        options: CarouselOptions(
-                            autoPlay: false,
-                            enlargeCenterPage: true,
-                            viewportFraction: 0.8,
-                            enlargeStrategy: CenterPageEnlargeStrategy.height,
-                            onPageChanged: (val, carouselPageChangedReason) {
-                              setState(() {
-                                _dotPosition = val;
-                              });
-                            })),
-                  ),
-                  SizedBox(height: 10),
-                  DotsIndicator(
-                    dotsCount: _carouselImages.length == 0
-                        ? 1
-                        : _carouselImages.length,
-                    position: _dotPosition.toDouble(),
-                    decorator: DotsDecorator(
-                      activeColor: Colors.deepOrange,
-                      spacing: EdgeInsets.all(2),
-                      color: Colors.deepOrange.withOpacity(0.4),
-                      activeSize: Size(8, 8),
-                      size: Size(6, 6),
+            SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    AspectRatio(
+                      aspectRatio: 2.5,
+                      child: CarouselSlider(
+                          items: _carouselImages
+                              .map((item) => Container(
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(item),
+                                            fit: BoxFit.fitWidth)),
+                                  ))
+                              .toList(),
+                          options: CarouselOptions(
+                              autoPlay: true,
+                              enlargeCenterPage: true,
+                              viewportFraction: 0.8,
+                              enlargeStrategy: CenterPageEnlargeStrategy.height,
+                              onPageChanged: (val, carouselPageChangedReason) {
+                                setState(() {
+                                  _dotPosition = val;
+                                });
+                              })),
                     ),
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Container(
-                          color: Color.fromARGB(255, 72, 112, 145),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.menu_book,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  "Select job category",
-                                  style: GoogleFonts.arvo(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )
-                              ],
+                    SizedBox(height: 10),
+                    DotsIndicator(
+                      dotsCount: _carouselImages.length == 0
+                          ? 1
+                          : _carouselImages.length,
+                      position: _dotPosition.toDouble(),
+                      decorator: DotsDecorator(
+                        activeColor: Colors.deepOrange,
+                        spacing: EdgeInsets.all(2),
+                        color: Colors.deepOrange.withOpacity(0.4),
+                        activeSize: Size(8, 8),
+                        size: Size(6, 6),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Container(
+                            color: Color.fromARGB(255, 72, 112, 145),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.menu_book,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    "Select job category",
+                                    style: GoogleFonts.arvo(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      space(10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: Column(
-                          children: [
-                            //development
-                            Container(
-                              width: 300,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 191, 186, 186),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border:
-                                      Border.all(color: Colors.blue, width: 2)),
-                              child: FlatButton(
-                                  onPressed: () {
-                                    nextScreen(
-                                        context, cat_job_show("Development"));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.app_settings_alt),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Development",
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
+                        space(10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                          child: Column(
+                            children: [
+                              //development
+                              Container(
+                                width: 300,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 191, 186, 186),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 2)),
+                                child: FlatButton(
+                                    onPressed: () {
+                                      nextScreen(
+                                          context, cat_job_show("Development"));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.app_settings_alt),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          "Development",
+                                          style: GoogleFonts.arvo(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            space(15),
+                                      ],
+                                    )),
+                              ),
+                              space(15),
 
-                            //Education
-                            Container(
-                              width: 300,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 191, 186, 186),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border:
-                                      Border.all(color: Colors.blue, width: 2)),
-                              child: FlatButton(
-                                  onPressed: () {
-                                    nextScreen(
-                                        context, cat_job_show("Education"));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.cast_for_education),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Education",
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
+                              //Education
+                              Container(
+                                width: 300,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 191, 186, 186),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 2)),
+                                child: FlatButton(
+                                    onPressed: () {
+                                      nextScreen(
+                                          context, cat_job_show("Education"));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.cast_for_education),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          "Education",
+                                          style: GoogleFonts.arvo(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            space(15),
+                                      ],
+                                    )),
+                              ),
+                              space(15),
 
-                            //Sales
-                            Container(
-                              width: 300,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 191, 186, 186),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border:
-                                      Border.all(color: Colors.blue, width: 2)),
-                              child: FlatButton(
-                                  onPressed: () {
-                                    nextScreen(context, cat_job_show("Sales"));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.sell),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Sales",
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
+                              //Sales
+                              Container(
+                                width: 300,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 191, 186, 186),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 2)),
+                                child: FlatButton(
+                                    onPressed: () {
+                                      nextScreen(
+                                          context, cat_job_show("Sales"));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.sell),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          "Sales",
+                                          style: GoogleFonts.arvo(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            space(15),
+                                      ],
+                                    )),
+                              ),
+                              space(15),
 
-                            //Health Care
-                            Container(
-                              width: 300,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 191, 186, 186),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border:
-                                      Border.all(color: Colors.blue, width: 2)),
-                              child: FlatButton(
-                                  onPressed: () {
-                                    nextScreen(
-                                        context, cat_job_show("Medical Care"));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.health_and_safety),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Health Care",
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
+                              //Health Care
+                              Container(
+                                width: 300,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 191, 186, 186),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 2)),
+                                child: FlatButton(
+                                    onPressed: () {
+                                      nextScreen(context,
+                                          cat_job_show("Medical Care"));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.health_and_safety),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          "Health Care",
+                                          style: GoogleFonts.arvo(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            space(15),
+                                      ],
+                                    )),
+                              ),
+                              space(15),
 
-                            //Receptionist
-                            Container(
-                              width: 300,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 191, 186, 186),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border:
-                                      Border.all(color: Colors.blue, width: 2)),
-                              child: FlatButton(
-                                  onPressed: () {
-                                    nextScreen(
-                                        context, cat_job_show("Receptionist"));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.boy),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Receptionist",
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
+                              //Receptionist
+                              Container(
+                                width: 300,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 191, 186, 186),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 2)),
+                                child: FlatButton(
+                                    onPressed: () {
+                                      nextScreen(context,
+                                          cat_job_show("Receptionist"));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.boy),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          "Receptionist",
+                                          style: GoogleFonts.arvo(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            space(15),
+                                      ],
+                                    )),
+                              ),
+                              space(15),
 
-                            //Pharmaceutical
-                            Container(
-                              width: 300,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 191, 186, 186),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border:
-                                      Border.all(color: Colors.blue, width: 2)),
-                              child: FlatButton(
-                                  onPressed: () {
-                                    nextScreen(context,
-                                        cat_job_show("Pharmaceutical"));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.local_pharmacy_outlined),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Pharmaceutical",
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
+                              //Pharmaceutical
+                              Container(
+                                width: 300,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 191, 186, 186),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 2)),
+                                child: FlatButton(
+                                    onPressed: () {
+                                      nextScreen(context,
+                                          cat_job_show("Pharmaceutical"));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.local_pharmacy_outlined),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          "Pharmaceutical",
+                                          style: GoogleFonts.arvo(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            space(15),
+                                      ],
+                                    )),
+                              ),
+                              space(15),
 
-                            //Custom
-                            Container(
-                              width: 300,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 191, 186, 186),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border:
-                                      Border.all(color: Colors.blue, width: 2)),
-                              child: FlatButton(
-                                  onPressed: () {
-                                    nextScreen(context, cat_job_show("Custom"));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.dashboard_customize),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Custom",
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
+                              //Custom
+                              Container(
+                                width: 300,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 191, 186, 186),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 2)),
+                                child: FlatButton(
+                                    onPressed: () {
+                                      nextScreen(
+                                          context, cat_job_show("Custom"));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.dashboard_customize),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          "Custom",
+                                          style: GoogleFonts.arvo(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            space(15),
+                                      ],
+                                    )),
+                              ),
+                              space(15),
 
-                            //Finance
-                            Container(
-                              width: 300,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 191, 186, 186),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border:
-                                      Border.all(color: Colors.blue, width: 2)),
-                              child: FlatButton(
-                                  onPressed: () {
-                                    nextScreen(
-                                        context, cat_job_show("Finance"));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.attach_money),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Finance",
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
+                              //Finance
+                              Container(
+                                width: 300,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 191, 186, 186),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 2)),
+                                child: FlatButton(
+                                    onPressed: () {
+                                      nextScreen(
+                                          context, cat_job_show("Finance"));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.attach_money),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          "Finance",
+                                          style: GoogleFonts.arvo(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            space(15),
+                                      ],
+                                    )),
+                              ),
+                              space(15),
 
-                            //Others
-                            Container(
-                              width: 300,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 191, 186, 186),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border:
-                                      Border.all(color: Colors.blue, width: 2)),
-                              child: FlatButton(
-                                  onPressed: () {
-                                    nextScreen(context, cat_job_show("Others"));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.account_balance),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Others",
-                                        style: GoogleFonts.arvo(
-                                          fontSize: 20,
+                              //Others
+                              Container(
+                                width: 300,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 191, 186, 186),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 2)),
+                                child: FlatButton(
+                                    onPressed: () {
+                                      nextScreen(
+                                          context, cat_job_show("Others"));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.account_balance),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          "Others",
+                                          style: GoogleFonts.arvo(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            space(15),
-                          ],
+                                      ],
+                                    )),
+                              ),
+                              space(15),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
           ],

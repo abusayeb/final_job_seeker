@@ -70,6 +70,7 @@ class _LogInState extends State<LogIn> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: TextFormField(
+                              autofillHints: [AutofillHints.email],
                               cursorColor: Colors.blueAccent,
                               decoration: textInputDecoration.copyWith(
                                   prefixIcon: const Icon(Icons.mail,

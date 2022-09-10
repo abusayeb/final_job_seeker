@@ -110,7 +110,7 @@ class _new_jobState extends State<new_job> {
                               );
                             }).toList(),
                             hint: Text(
-                              "Please choose a job Category                       ",
+                              "Please choose a job Category             ",
                               style: GoogleFonts.lato(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 16,
