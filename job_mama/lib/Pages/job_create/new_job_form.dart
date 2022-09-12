@@ -56,9 +56,17 @@ class _new_jobState extends State<new_job> {
           ),
         ),
         appBar: AppBar(
-          title: Text("JOB BAZAR"),
+          title: Text(
+            "Job Bazaar",
+            style: GoogleFonts.aldrich(
+                color: Colors.white70,
+                fontSize: 25,
+                fontWeight: FontWeight.w900),
+          ),
           centerTitle: true,
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.purple,
+          // backgroundColor: Color.fromARGB(255, 221, 170, 120),
+          //0.5 is transparency
         ),
         body: SingleChildScrollView(
           child: Padding(

@@ -52,8 +52,9 @@ class _cat_job_showState extends State<cat_job_show> {
       ),
       appBar: AppBar(
         title: Text(
-          "Job Bazar",
-          style: GoogleFonts.aldrich(fontSize: 25, fontWeight: FontWeight.w900),
+          cat,
+          style: GoogleFonts.aldrich(
+              color: Colors.white70, fontSize: 25, fontWeight: FontWeight.w900),
         ),
         centerTitle: true,
         backgroundColor: Colors.purple,

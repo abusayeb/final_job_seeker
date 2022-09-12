@@ -1,12 +1,11 @@
-import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:job_mama/Pages/CV/cv.dart';
+import 'package:job_mama/Pages/Test/new_job_form_test.dart';
 import 'package:job_mama/Widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Pages/Homepage/Homepage.dart';
-import 'Pages/Test/dropDown.dart';
 import 'Pages/User_Access/login.dart';
 
 Future main() async {
@@ -51,7 +50,8 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       home: isLoggedIn ? HomePage() : LogIn(),
-      // home: DropDownDemo(),
+      // home: cv_maker(),
+      // home: const cv_maker(),
     );
   }
 }

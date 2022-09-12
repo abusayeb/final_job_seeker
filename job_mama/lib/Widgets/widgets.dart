@@ -13,6 +13,10 @@ final textInputDecoration = InputDecoration(
     borderSide: const BorderSide(color: Colors.blueAccent, width: 2),
     borderRadius: BorderRadius.circular(15),
   ),
+  disabledBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: Colors.grey, width: 2),
+    borderRadius: BorderRadius.circular(15),
+  ),
   focusedBorder: OutlineInputBorder(
     borderSide: const BorderSide(color: Colors.orange, width: 2),
     borderRadius: BorderRadius.circular(15),

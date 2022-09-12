@@ -20,112 +20,125 @@ class job_show extends StatelessWidget {
     return Scaffold(
         drawer: Drawer(),
         appBar: AppBar(
-          title: Text('$post'),
+          title: Text(
+            "$post",
+            style: GoogleFonts.aldrich(
+                color: Colors.white70,
+                fontSize: 25,
+                fontWeight: FontWeight.w900),
+          ),
           centerTitle: true,
+          backgroundColor: Colors.purple,
+          // backgroundColor: Color.fromARGB(255, 221, 170, 120),
+          //0.5 is transparency
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              //Company Name
-              Text(
-                "Post name",
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 25,
-                  color: Colors.black54,
+        body: Container(
+          height: MediaQuery.of(context).size.height * .9,
+          color: Color.fromARGB(255, 194, 213, 248),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                //Company Name
+                Text(
+                  "Post name",
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 25,
+                    color: Colors.black54,
+                  ),
                 ),
-              ),
-              space(2),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Icon(Icons.post_add_rounded),
-                Text("$post"),
-              ]),
-              space(15),
+                space(2),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Icon(Icons.post_add_rounded),
+                  Text("$post"),
+                ]),
+                space(15),
 
-              //Post name
-              Text(
-                "Company name",
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 25,
-                  color: Colors.black54,
+                //Post name
+                Text(
+                  "Company name",
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 25,
+                    color: Colors.black54,
+                  ),
                 ),
-              ),
-              space(2),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Icon(Icons.settings),
-                Text("$Com_name"),
-              ]),
+                space(2),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Icon(Icons.settings),
+                  Text("$Com_name"),
+                ]),
 
-              space(15),
+                space(15),
 
-              //Location
-              Text(
-                "location",
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 25,
-                  color: Colors.black54,
+                //Location
+                Text(
+                  "location",
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 25,
+                    color: Colors.black54,
+                  ),
                 ),
-              ),
-              space(2),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Icon(Icons.location_on),
-                Text("$Location"),
-              ]),
+                space(2),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Icon(Icons.location_on),
+                  Text("$Location"),
+                ]),
 
-              space(15),
+                space(15),
 
-              //Job type
-              Text(
-                "Job Type",
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 25,
-                  color: Colors.black54,
+                //Job type
+                Text(
+                  "Job Type",
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 25,
+                    color: Colors.black54,
+                  ),
                 ),
-              ),
-              space(2),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Icon(Icons.self_improvement),
-                Text("$job_type"),
-              ]),
+                space(2),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Icon(Icons.self_improvement),
+                  Text("$job_type"),
+                ]),
 
-              space(15),
+                space(15),
 
-              //Requirements
-              Text(
-                "Requirement",
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 25,
-                  color: Colors.black54,
+                //Requirements
+                Text(
+                  "Requirement",
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 25,
+                    color: Colors.black54,
+                  ),
                 ),
-              ),
-              space(2),
-              Text(
-                "$requirement",
-                style: GoogleFonts.lato(),
-              ),
-              space(15),
-
-              //Last date
-              Text(
-                "Deadline",
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 25,
-                  color: Colors.black54,
+                space(2),
+                Text(
+                  "$requirement",
+                  style: GoogleFonts.lato(),
                 ),
-              ),
-              space(2),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Icon(Icons.date_range_outlined),
-                Text("$Last_date"),
-              ]),
-              space(20),
-              ElevatedButton(
-                  onPressed: () {
-                    nextScreen(context, SettingsUI());
-                  },
-                  child: Text("Apply Now"))
-            ],
+                space(15),
+
+                //Last date
+                Text(
+                  "Deadline",
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 25,
+                    color: Colors.black54,
+                  ),
+                ),
+                space(2),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Icon(Icons.date_range_outlined),
+                  Text("$Last_date"),
+                ]),
+                space(20),
+                ElevatedButton(
+                    onPressed: () {
+                      nextScreen(context, cv_maker());
+                    },
+                    child: Text("Apply Now"))
+              ],
+            ),
           ),
         ));
   }

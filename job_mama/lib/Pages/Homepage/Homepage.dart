@@ -71,11 +71,16 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       appBar: AppBar(
-          title: Text("Job Bazar"),
-          centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 249, 147, 57)
-          //0.5 is transparency
-          ),
+        title: Text(
+          "Job Bazar",
+          style: GoogleFonts.aldrich(
+              color: Colors.white70, fontSize: 25, fontWeight: FontWeight.w900),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.purple,
+        // backgroundColor: Color.fromARGB(255, 221, 170, 120),
+        //0.5 is transparency
+      ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -93,11 +98,16 @@ class _HomePageState extends State<HomePage> {
                       aspectRatio: 2.5,
                       child: CarouselSlider(
                           items: _carouselImages
-                              .map((item) => Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: NetworkImage(item),
-                                            fit: BoxFit.fitWidth)),
+                              .map((item) => GestureDetector(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(item),
+                                              fit: BoxFit.fitWidth)),
+                                    ),
+                                    onTap: () {
+                                      print(item);
+                                    },
                                   ))
                               .toList(),
                           options: CarouselOptions(

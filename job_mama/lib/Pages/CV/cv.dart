@@ -1,188 +1,1169 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:job_mama/Pages/CV/setting_page.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:job_mama/Pages/Homepage/Homepage.dart';
+import 'package:job_mama/Pages/Test/new_job_form_test.dart';
+import 'package:job_mama/Widgets/widgets.dart';
 
-class SettingsUI extends StatelessWidget {
+class cv_maker extends StatefulWidget {
+  const cv_maker({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Setting UI",
-      home: EditProfilePage(),
-    );
-  }
+  State<cv_maker> createState() => _cv_makerState();
 }
 
-class EditProfilePage extends StatefulWidget {
-  @override
-  _EditProfilePageState createState() => _EditProfilePageState();
-}
+class _cv_makerState extends State<cv_maker> {
+  String first_name = "";
+  String last_name = "";
+  String fathers_name = "";
+  String mothers_name = "";
+  String per_villageOrStreet = "";
+  String per_upzila = "";
+  String per_district = "";
+  String per_division = "";
+  String per_post_code = "";
+  String per_country = "";
+  String pre_villageOrStreet = "";
+  String pre_upzila = "";
+  String pre_district = "";
+  String pre_division = "";
+  String pre_post_code = "";
+  String pre_country = "";
+  String birthday = "";
+  String email = "";
+  String ssc_grade = "";
+  String hsc_grade = "";
+  String honours_grade = "";
+  String masters_grade = "";
+  bool isCheck_ssc = false;
+  bool isCheck_hsc = false;
+  bool isCheck_honours = false;
+  bool isCheck_masters = false;
+  bool isCheck_add = true;
+  String nid = "";
+  String mar_status = "";
 
-class _EditProfilePageState extends State<EditProfilePage> {
-  bool showPassword = false;
+  var formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 1,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.green,
+        appBar: AppBar(
+          title: Text(
+            "CV DETAILS",
+            style: GoogleFonts.aldrich(
+                color: Colors.white70,
+                fontSize: 25,
+                fontWeight: FontWeight.w900),
           ),
-          onPressed: () {},
+          centerTitle: true,
+          backgroundColor: Colors.purple,
+          // backgroundColor: Color.fromARGB(255, 221, 170, 120),
+          //0.5 is transparency
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.green,
+        body: Container(
+            height: MediaQuery.of(context).size.height * 90,
+            width: MediaQuery.of(context).size.width * 95,
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 194, 213, 248),
             ),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => SettingsPage()));
-            },
-          ),
-        ],
-      ),
-      body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-        child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: ListView(
-            children: [
-              Text(
-                "Edit Profile",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor),
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.1),
-                                offset: Offset(0, 10))
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                              ))),
-                    ),
-                    Positioned(
-                        bottom: 0,
-                        right: 0,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Form(
+                  key: formkey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //Name text field
+                      Row(
+                        children: [
+                          //First name
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 20,
+                                width: 160,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "  First Name  :",
+                                  style: GoogleFonts.arvo(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              space(3),
+                              //Fathers name field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "First Name",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      first_name = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "Name field can't be empty";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 10),
+
+                          //Last name
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 20,
+                                width: 130,
+                                alignment: Alignment.bottomLeft,
+                                child: Text(
+                                  "  Last Name  :",
+                                  style: GoogleFonts.arvo(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              space(3),
+
+                              //Last name field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Last Name",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      last_name = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "Name field can't be empty";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      space(15),
+
+                      //Fathers name & mothers name
+
+                      Row(
+                        children: [
+                          //Fathers name
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 20,
+                                width: 130,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  " Fathers Name  :",
+                                  style: GoogleFonts.arvo(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              space(3),
+
+                              //Fathers name field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Fathers Name",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      fathers_name = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 10),
+
+                          //Mothers name
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 20,
+                                width: 130,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  " Mothers Name  :",
+                                  style: GoogleFonts.arvo(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              space(3),
+
+                              //Mothers name field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Mothers Name",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      mothers_name = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      space(15),
+
+                      //Permanent address
+                      //Permanent address
+                      //Permanent address
+                      //Permanent address
+
+                      Container(
+                        height: 20,
+                        width: 200,
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          " Permanent Address  :",
+                          style: GoogleFonts.arvo(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      space(5),
+                      Row(
+                        children: [
+                          //Left side permanent address
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //village
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Village/Street name",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      per_villageOrStreet = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                              space(10),
+
+                              //Upozila
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Upozila/City corporation",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      per_upzila = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+
+                              space(10),
+
+                              //Division field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Division",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      per_division = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(width: 10),
+
+                          //right side
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //Post code field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Post code",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      per_post_code = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                              space(10),
+
+                              //District field
+
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "District",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      per_district = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                              space(10),
+
+                              //Country field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Country",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      per_country = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      space(15),
+
+                      //Present address
+                      //Present address
+                      //Present address
+                      //Present address
+                      //Present address
+
+                      Container(
+                        height: 20,
+                        width: 200,
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          " Present Address  :",
+                          style: GoogleFonts.arvo(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      space(5),
+
+                      Row(
+                        children: [
+                          Text(
+                            " Similar to permanent address?",
+                            style: GoogleFonts.aldrich(),
+                          ),
+                          Checkbox(
+                              value: isCheck_add,
+                              onChanged: (val) {
+                                setState(() {
+                                  isCheck_add = val!;
+                                });
+                              }),
+                        ],
+                      ),
+                      space(5),
+
+                      Row(
+                        children: [
+                          //Left side permanent address
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //village
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  enabled: !isCheck_add,
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Village/Street name",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      pre_villageOrStreet = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                              space(10),
+
+                              //Upozila
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  enabled: !isCheck_add,
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Upozila/City corporation",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      pre_upzila = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+
+                              space(10),
+
+                              //Division field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  enabled: !isCheck_add,
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Division",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      pre_division = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(width: 10),
+
+                          //right side
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //Post code
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  enabled: !isCheck_add,
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Post code",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      pre_post_code = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                              space(10),
+
+                              //District field
+
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  enabled: !isCheck_add,
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "District",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      pre_district = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                              space(10),
+
+                              //Country field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  enabled: !isCheck_add,
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Country",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      pre_country = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      //Birth day & email
+                      //Birth day & email
+                      //Birth day & email
+                      //Birth day & email
+                      //Birth day & email
+                      //Birth day & email
+
+                      Row(
+                        children: [
+                          //Birthday
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 20,
+                                width: 120,
+                                alignment: Alignment.bottomLeft,
+                                child: Text(
+                                  " Birthday  :",
+                                  style: GoogleFonts.arvo(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              space(3),
+                              //Birthday field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "26/10/2000",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      birthday = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 10),
+
+                          //Email
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 20,
+                                width: 130,
+                                alignment: Alignment.bottomLeft,
+                                child: Text(
+                                  "  Email  :",
+                                  style: GoogleFonts.arvo(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              space(3),
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Enter Email",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      email = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    bool isValid =
+                                        EmailValidator.validate(val!);
+                                    return isValid
+                                        ? null
+                                        : "Please enter a valid email";
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      space(15),
+
+                      //Educational qualification
+                      //Educational qualification
+                      //Educational qualification
+                      //Educational qualification
+
+                      Container(
+                        height: 20,
+                        width: 300,
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          " Educational Qualifications  :",
+                          style: GoogleFonts.arvo(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+
+                      space(3),
+
+                      //Checkbox and exam field
+                      //Checkbox and exam field
+                      //Checkbox and exam field
+
+                      Column(
+                        children: [
+                          //ssc row
+                          Row(
+                            children: [
+                              Checkbox(
+                                  value: isCheck_ssc,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      isCheck_ssc = val!;
+                                    });
+                                  }),
+                              // SizedBox(width: 5),
+                              Text("SSC",
+                                  style: GoogleFonts.lato(
+                                      fontSize: 17,
+                                      fontStyle: FontStyle.italic)),
+
+                              SizedBox(width: 40),
+
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  enabled: isCheck_ssc,
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "SSC GPA",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      ssc_grade = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty!";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          space(2),
+
+                          //HSC row
+                          Row(
+                            children: [
+                              Checkbox(
+                                  value: isCheck_hsc,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      isCheck_hsc = val!;
+                                    });
+                                  }),
+                              // SizedBox(width: 5),
+                              Text("HSC",
+                                  style: GoogleFonts.lato(
+                                      fontSize: 17,
+                                      fontStyle: FontStyle.italic)),
+
+                              SizedBox(width: 39),
+
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  enabled: isCheck_hsc,
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "HSC GPA",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      hsc_grade = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          //Honours result
+
+                          Row(
+                            children: [
+                              Checkbox(
+                                  value: isCheck_honours,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      isCheck_honours = val!;
+                                    });
+                                  }),
+                              // SizedBox(width: 5),
+                              Text("Honours",
+                                  style: GoogleFonts.lato(
+                                      fontSize: 17,
+                                      fontStyle: FontStyle.italic)),
+
+                              SizedBox(width: 10),
+
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  enabled: isCheck_honours,
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Honours CGPA",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      honours_grade = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          //Masters
+
+                          Row(
+                            children: [
+                              Checkbox(
+                                  value: isCheck_masters,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      isCheck_masters = val!;
+                                    });
+                                  }),
+                              // SizedBox(width: 5),
+                              Text("Masters",
+                                  style: GoogleFonts.lato(
+                                      fontSize: 17,
+                                      fontStyle: FontStyle.italic)),
+
+                              SizedBox(width: 15),
+
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  enabled: isCheck_masters,
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Masters CGPA",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      masters_grade = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+
+                      space(15),
+
+                      //Marital status and National Id number
+                      Row(
+                        children: [
+                          //First name
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 20,
+                                width: 160,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "  Marital Status  :",
+                                  style: GoogleFonts.arvo(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              space(3),
+                              //Fathers name field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "Married/Unmarried",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      mar_status = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 10),
+
+                          //Last name
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 20,
+                                width: 130,
+                                alignment: Alignment.bottomLeft,
+                                child: Text(
+                                  "  NID No  :",
+                                  style: GoogleFonts.arvo(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              space(3),
+
+                              //First name field
+                              Container(
+                                width: 165,
+                                height: 40,
+                                child: TextFormField(
+                                  cursorColor: Colors.blueAccent,
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: "NID no",
+                                      hintStyle: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                      )),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nid = value;
+                                    });
+                                  },
+                                  validator: (val) {
+                                    if (val!.length == 0) {
+                                      return "This field can't be empty";
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      space(15),
+
+                      //submit button
+
+                      Center(
                         child: Container(
+                          width: 150,
                           height: 40,
-                          width: 40,
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor,
-                            ),
-                            color: Colors.green,
+                            color: Colors.purple.withOpacity(.3),
+                            border:
+                                Border.all(color: Colors.blueAccent, width: 2),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                          ),
-                        )),
-                  ],
+                          child: FlatButton(
+                              onPressed: () {
+                                submit();
+                              },
+                              child: Text(
+                                "SUBMIT",
+                                style: GoogleFonts.aldrich(fontSize: 20),
+                              )),
+                        ),
+                      ),
+                      space(30),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(
-                height: 35,
-              ),
-              buildTextField("Full Name", "Dor Alex", false),
-              buildTextField("E-mail", "alexd@gmail.com", false),
-              buildTextField("Password", "********", true),
-              buildTextField("Location", "Palestine", false),
-              SizedBox(
-                height: 35,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  FlatButton(
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    onPressed: () {},
-                    child: Text("CANCEL",
-                        style: TextStyle(
-                            fontSize: 14,
-                            letterSpacing: 2.2,
-                            color: Colors.black)),
-                  ),
-                  RaisedButton(
-                    onPressed: () {},
-                    color: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Text(
-                      "SAVE",
-                      style: TextStyle(
-                          fontSize: 14,
-                          letterSpacing: 2.2,
-                          color: Colors.white),
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+            )));
   }
 
-  Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 35.0),
-      child: TextField(
-        obscureText: isPasswordTextField ? showPassword : false,
-        decoration: InputDecoration(
-            suffixIcon: isPasswordTextField
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        showPassword = !showPassword;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.grey,
-                    ),
-                  )
-                : null,
-            contentPadding: EdgeInsets.only(bottom: 3),
-            labelText: labelText,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            )),
-      ),
-    );
+  void submit() {
+    if (formkey.currentState!.validate()) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          });
+      Navigator.pop(context);
+
+      AlertDialog(
+        content: Text("CV submitted successfully!"),
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                nextScreen(context, HomePage());
+              },
+              child: Text("Ok")),
+        ],
+      );
+    }
   }
 }
